@@ -13,6 +13,7 @@ Unity.InputSystem.dll
 Unity.Netcode.Runtime.dll
 UnityEngine.AnimationModule.dll
 UnityEngine.AssetBundleModule.dll
+UnityEngine.AudioModule.dll
 UnityEngine.CoreModule.dll
 UnityEngine.dll
 ```
