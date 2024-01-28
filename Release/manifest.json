@@ -1,6 +1,6 @@
 {
     "name": "FacilityMeltdown_Patch",
-    "version_number": "1.0.0",
+    "version_number": "1.0.1",
     "description": "A mod I made for my group of friends that patches FacilityMeltdown.",
     "website_url": "https://github.com/rtpoogle/FacilityMeltdownPatch",
     "dependencies": [
