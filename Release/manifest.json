@@ -1,7 +1,7 @@
 {
     "name": "FacilityMeltdown_Patch",
     "version_number": "1.0.0",
-    "description": "Patches FacilityMeltdown to only play the alarm voice whilst near or in the facility.",
+    "description": "A mod I made for my group of friends that patches FacilityMeltdown.",
     "website_url": "https://github.com/rtpoogle/FacilityMeltdownPatch",
     "dependencies": [
         "BepInEx-BepInExPack-5.4.2100",
