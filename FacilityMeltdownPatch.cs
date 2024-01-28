@@ -3,23 +3,13 @@ using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GameNetcodeStuff;
 using System.Reflection.Emit;
 using BepInEx.Logging;
 using System.Reflection;
 using FacilityMeltdown;
 using FacilityMeltdown.Effects;
-using UnityEngine.InputSystem.Controls;
-using UnityEngine.InputSystem;
 using UnityEngine;
-using UnityEngine.Diagnostics;
-using System.Runtime.CompilerServices;
-using FacilityMeltdown.API;
-using System.Collections;
-using static UnityEngine.GraphicsBuffer;
-using System.Net;
 using System.Text.RegularExpressions;
-using UnityEngine.Profiling;
 using FacilityMeltdown.Util;
 using FacilityMeltdown.Networking;
 
@@ -31,7 +21,7 @@ namespace FacilityMeltdownPatch
     {
         public const string GUID = "xyz.poogle.facilitymeltdownpatch";
         public const string NAME = "Facility Meltdown Patch";
-        public const string VER = "1.0.0";
+        public const string VER = "1.0.1";
         public readonly Harmony harmony = new Harmony(GUID);
 
         public ManualLogSource LogSrc;
