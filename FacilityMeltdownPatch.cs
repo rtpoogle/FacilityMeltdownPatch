@@ -51,27 +51,6 @@ namespace FacilityMeltdownPatch
             FacilityMeltdownPatchPlugin.Instance.harmony.PatchAll();
         }
 
-        [HarmonyPatch(typeof(MeltdownHandler))]
-        [HarmonyPatch("Start")]
-        public static class MeltdownHandler_Start_Patch
-        {
-            static Regex replacer = new Regex("<color.*(?<time>\\d)\\s*minutes.*</color>", RegexOptions.IgnoreCase);
-
-            public static void Prefix(MeltdownHandler __instance)
-            {
-                MeltdownHandler.introDialogue.Do(d =>
-                {
-                    Match match = replacer.Match(d.bodyText);
-
-                    if (match.Success)
-                    {
-                        d.bodyText = d.bodyText.Replace(match.Groups["time"].Value, TimeSpan.FromSeconds(SyncedInstance<MeltdownConfig>.Instance.MELTDOWN_TIME).Minutes.ToString());
-                    }
-                });
-
-            }
-        }
-
         [HarmonyPatch(typeof(WarningAnnouncerEffect))]
         [HarmonyPatch("Setup")]
         public static class WarningAnnouncerEffect_Setup_Patch
