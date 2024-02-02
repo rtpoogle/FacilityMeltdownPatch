@@ -1,10 +1,10 @@
 {
     "name": "FacilityMeltdown_Patch",
-    "version_number": "1.0.1",
+    "version_number": "1.1.0",
     "description": "A mod I made for my group of friends that patches FacilityMeltdown.",
     "website_url": "https://github.com/rtpoogle/FacilityMeltdownPatch",
     "dependencies": [
         "BepInEx-BepInExPack-5.4.2100",
-        "loaforc-FacilityMeltdown-2.0.2"
+        "loaforc-FacilityMeltdown-2.2.0"
     ]
 }

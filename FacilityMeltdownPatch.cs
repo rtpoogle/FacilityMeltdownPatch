@@ -9,9 +9,6 @@ using System.Reflection;
 using FacilityMeltdown;
 using FacilityMeltdown.Effects;
 using UnityEngine;
-using System.Text.RegularExpressions;
-using FacilityMeltdown.Util;
-using FacilityMeltdown.Networking;
 
 namespace FacilityMeltdownPatch
 {
@@ -21,7 +18,7 @@ namespace FacilityMeltdownPatch
     {
         public const string GUID = "xyz.poogle.facilitymeltdownpatch";
         public const string NAME = "Facility Meltdown Patch";
-        public const string VER = "1.0.1";
+        public const string VER = "1.1.0";
         public readonly Harmony harmony = new Harmony(GUID);
 
         public ManualLogSource LogSrc;
