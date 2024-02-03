@@ -18,7 +18,7 @@ namespace FacilityMeltdownPatch
     {
         public const string GUID = "xyz.poogle.facilitymeltdownpatch";
         public const string NAME = "Facility Meltdown Patch";
-        public const string VER = "1.1.0";
+        public const string VER = "1.1.1";
         public readonly Harmony harmony = new Harmony(GUID);
 
         public ManualLogSource LogSrc;
@@ -82,6 +82,7 @@ namespace FacilityMeltdownPatch
 
                 MethodInfo FindObjectsOfType = AccessTools.Method(typeof(UnityEngine.Object), nameof(UnityEngine.Object.FindObjectsOfType), null, new Type[] { typeof(EntranceTeleport) });
                 MethodInfo ToList = AccessTools.Method(typeof(Enumerable), nameof(Enumerable.ToList), null, new Type[] { typeof(EntranceTeleport) });
+                
                 var code = new List<CodeInstruction>(instructions);
 
                 int insertionIndex = -1;
@@ -128,33 +129,26 @@ namespace FacilityMeltdownPatch
             {
                 AllEntrances.ForEach(entrance =>
                 {
-                    if (ReferenceEquals(instance, null) || ReferenceEquals(entrance, null)) {
+                    if (instance is null || entrance is null) {
                         FacilityMeltdownPatchPlugin.Instance.LogSrc.LogError("null check failed!");
                         return;
                     }
-
+                    
+                    float distanceMultiplier = 1f;
                     Vector3 PlayerPos = GameNetworkManager.Instance.localPlayerController.transform.position;
+                    Vector3 DoorPos = entrance.entrancePoint.transform.position;
 
-                    switch (GameNetworkManager.Instance.localPlayerController.isInsideFactory)
+                    if (GameNetworkManager.Instance.localPlayerController.isInsideFactory)
                     {
-                        case true:
-                            if(entrance.gotExitPoint)
-                            {
-                                Vector3 InsideDoorPos = entrance.exitPoint.transform.position;
-                                instance.warningAudioSource.transform.position = InsideDoorPos;
-                                instance.warningAudioSource.PlayOneShot(instance.warningAudioSource.clip, 1 - Vector3.Distance(InsideDoorPos, PlayerPos) / (instance.warningAudioSource.maxDistance * 1.5f));
-                            }
-                            else
-                            {
-                                entrance.FindExitPoint();
-                            }
-                            break;
-                        case false:
-                            Vector3 OutsideDoorPos = entrance.entrancePoint.transform.position;
-                            instance.warningAudioSource.transform.position = OutsideDoorPos;
-                            instance.warningAudioSource.PlayOneShot(instance.warningAudioSource.clip, 1 - Vector3.Distance(OutsideDoorPos, PlayerPos) / instance.warningAudioSource.maxDistance);
-                            break;
+                        if(entrance.gotExitPoint || entrance.FindExitPoint())
+                        {
+                            distanceMultiplier = 1.5f;
+                            DoorPos = entrance.exitPoint.transform.position;
+                        }
                     }
+
+                    instance.warningAudioSource.transform.position = DoorPos;
+                    instance.warningAudioSource.PlayOneShot(instance.warningAudioSource.clip, 1 - Vector3.Distance(DoorPos, PlayerPos) / (instance.warningAudioSource.maxDistance * distanceMultiplier));
                 });
             }
         }
